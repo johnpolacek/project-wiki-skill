@@ -83,6 +83,8 @@ Plan files must be useful from a terminal. Optimize the first 80 lines of `wiki/
 - recently completed unit or sync event, when useful
 - exact plan files to read next
 
+Completed plans should not remain in active current-plan or current-unit slots. When a whole plan is complete, move it under `wiki/plans/zzz_completed/` and keep only a compact completed-plan link in `wiki/plans/README.md`.
+
 Every active plan should start with a compact summary block:
 
 ```markdown
@@ -165,6 +167,9 @@ wiki/plans/
   README.md
   features/
     feature-slug.md
+  zzz_completed/
+    features/
+      completed-feature.md
 ```
 
 A feature plan should include:
@@ -179,6 +184,8 @@ A feature plan should include:
 - next execution unit or next planning decision
 
 Keep feature plans lean. If a plan becomes a sequence of multiple independent implementation sessions, either split it into smaller feature plans or promote it into an `mvp/` stage/unit structure.
+
+When a feature plan reaches `Status: complete`, move the whole feature plan from `wiki/plans/features/` to `wiki/plans/zzz_completed/features/` only after all execution units or completion gates are complete and verification is recorded or explicitly deferred with a reason.
 
 ## Syncing Recent Codebase Changes
 
@@ -204,6 +211,7 @@ Write the smallest durable sync:
 
 - Prefer appending `wiki/log.md` for material completed work, validation, decisions, and follow-ups that affect durable project context.
 - Update an existing plan when the change completed, invalidated, narrowed, expanded, or redirected that plan.
+- Move a fully complete plan into `wiki/plans/zzz_completed/` when its top-level status, stages, units, completion gates, and verification records all support completion.
 - Create a retrospective `wiki/plans/features/` plan only when the change introduced a durable feature track or future implementation dependency.
 - Update `wiki/plans/mvp/README.md` or stage/unit status only when the current next unit or planning target changed.
 - Update `wiki/roadmap.md` when the current goal, next decision, next steps, or deferred work changed.
@@ -268,11 +276,20 @@ wiki/plans/
       stage-01/
         01-define-stack.md
         02-create-minimal-app-shell.md
+  zzz_completed/
+    mvp/
+      README.md
+      stage-01-foundation.md
+      units/
+        stage-01/
+          01-define-stack.md
 ```
 
 `wiki/plans/mvp/README.md` should act as the live roadmap index. It should name the current status, most recent completed unit when known, and exactly one next execution unit or planning target.
 
 Stage files should describe the stage goal, completion gate, and unit sequence. Unit files should be small enough for one implementation pass.
+
+When all MVP stages and units are complete, move the whole `wiki/plans/mvp/` tree to `wiki/plans/zzz_completed/mvp/`. Do not move an MVP tree while any stage, unit, completion gate, or required verification remains incomplete, blocked, or unresolved.
 
 Good stage shape:
 
@@ -360,6 +377,31 @@ Recommended shape:
 
 This unit is complete when the guarded admin authoring shell can create, save, validate, and preview a draft without changing public publishing behavior.
 ```
+
+## Completed Plan Archive
+
+Use `wiki/plans/zzz_completed/` as the completed-plan archive. The `zzz_` prefix is intentional so active plan folders sort first in terminal listings.
+
+Archive by moving the whole completed plan tree, not by copying it:
+
+- `wiki/plans/features/feature-slug.md` moves to `wiki/plans/zzz_completed/features/feature-slug.md`.
+- `wiki/plans/mvp/` moves to `wiki/plans/zzz_completed/mvp/`.
+- Other future plan families, such as `maintenance/` or `releases/`, should preserve their family name under `zzz_completed/`.
+
+Before moving a plan, confirm:
+
+- the top-level plan status is `complete`
+- every stage status is complete, when stages exist
+- every unit status is complete, when units exist
+- every unit has `## Verification` recorded with automated, manual, or explicitly deferred verification
+- no current blocker or next action remains inside the plan except follow-up work that has been moved to a new active plan, roadmap deferred work, or `wiki/log.md`
+
+After moving a plan, update active dashboards:
+
+- remove the archived plan from active current-plan, current-stage, and current-unit fields
+- add or update a compact completed section in `wiki/plans/README.md` linking to the archived location
+- choose the next active plan or state that no active plan exists
+- append `wiki/log.md` only when completion changes durable project context, validation status, source truth, roadmap direction, or future planning
 
 ## `wiki/log.md` As Project Context History
 

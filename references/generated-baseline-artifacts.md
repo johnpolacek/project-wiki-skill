@@ -251,6 +251,7 @@ Fast-path exception: for small, local, reversible fixes that do not change produ
 
 - Use `features/` for focused feature plans that do not need a full numbered roadmap.
 - Use `mvp/` only for greenfield, pre-launch, or explicitly MVP work that needs numbered roadmap implementation sessions.
+- Use `zzz_completed/` for completed plans after all stages, units, completion gates, and verification records support completion.
 - For imported or existing live projects, default to `roadmap.md` plus focused `features/`, `maintenance/`, or `releases/` plans only when concrete workstreams justify them.
 - Keep bugfix or cleanup planning in the closest relevant existing plan.
 - Record completed work, decisions discovered during implementation, and verification in `../log.md` only when they affect durable project context.
@@ -258,6 +259,10 @@ Fast-path exception: for small, local, reversible fixes that do not change produ
 ## Current Planning State
 
 [No numbered implementation plan exists yet | Current plan: `mvp/README.md` | Next planning target: ...]
+
+## Completed Plans
+
+[No completed plans archived yet | Completed plans: `zzz_completed/features/example.md`]
 ```
 
 ## `wiki/roadmap.md`
@@ -316,9 +321,10 @@ Use this skill to maintain `[Project Name]`'s `wiki/` knowledge layer. Replace `
 1. Read `wiki/AGENTS.md` and `wiki/index.md` first.
 2. Preserve source context in `wiki/Sources.md`; create `wiki/sources/` briefs only when project evidence justifies them, including `design-brief.md` for durable UI design memory.
 3. Create or update durable plans under `wiki/plans/` before meaningful code, config, schema, dependency, architecture, test, build, or app behavior changes, except for small, local, reversible fixes that do not change durable project direction.
-4. Sync recent codebase changes back into `wiki/log.md`, relevant plans, roadmap, and source docs when work happened before planning or made the wiki stale.
-5. Update `wiki/index.md` when adding or materially changing durable pages.
-6. Append `wiki/log.md` after planning, validation, or material project changes that affect durable project context.
+4. Move fully complete plans into `wiki/plans/zzz_completed/` after all stages, units, completion gates, and verification records support completion; remove them from active current-plan slots while preserving compact archive links.
+5. Sync recent codebase changes back into `wiki/log.md`, relevant plans, roadmap, and source docs when work happened before planning or made the wiki stale.
+6. Update `wiki/index.md` when adding or materially changing durable pages.
+7. Append `wiki/log.md` after planning, validation, or material project changes that affect durable project context.
 
 ## Boundaries
 

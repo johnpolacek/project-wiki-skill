@@ -181,7 +181,7 @@ For CLI-friendly planning:
 Use $project-wiki to plan this feature for CLI-friendly execution.
 ```
 
-The agent should treat `wiki/plans/README.md` as the plan dashboard. It should keep the first screen of the dashboard and every active plan useful in a terminal: status, planning shape, current unit, blockers, next action, validation, and exact files to read next. For handoffs, the agent should summarize the current plan state and provide paths or commands such as:
+The agent should treat `wiki/plans/README.md` as the plan dashboard. It should keep the first screen of the dashboard and every active plan useful in a terminal: status, planning shape, current unit, blockers, next action, validation, and exact files to read next. Completed plans should move under `wiki/plans/zzz_completed/` and be removed from active current-plan slots while leaving compact archive links in the dashboard. For handoffs, the agent should summarize the current plan state and provide paths or commands such as:
 
 ```bash
 sed -n '1,80p' wiki/plans/README.md
@@ -201,6 +201,8 @@ Use $project-wiki to update the plan for the work we just completed.
 The agent should inspect current changes, validation results, and the relevant plan. It should update the plan only when the implementation completed, invalidated, narrowed, expanded, or redirected planned work. It should update `wiki/log.md` only for durable project-context changes, not routine commits, lint fixes, test runs, or obvious Git history.
 
 Every execution unit should include a `Verification` section with automated, manual, or explicitly deferred checks. A unit should not be marked complete unless verification is recorded or deferred with a reason.
+
+When the top-level plan, all stages, all units, completion gates, and required verification records support completion, the agent should move the whole completed plan tree into `wiki/plans/zzz_completed/`. For example, a finished feature plan moves from `wiki/plans/features/billing-export.md` to `wiki/plans/zzz_completed/features/billing-export.md`, while a finished MVP moves as the whole `wiki/plans/mvp/` tree to `wiki/plans/zzz_completed/mvp/`.
 
 If implementation changed source truth, roadmap direction, architecture, UI direction, or known constraints, the agent should also update `wiki/Sources.md`, source briefs, `wiki/roadmap.md`, or `wiki/index.md` as needed.
 

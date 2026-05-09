@@ -147,6 +147,9 @@ When a validation result is only useful for the current task and does not affect
 - Sets exactly one next execution unit or planning target when `wiki/plans/mvp/README.md` exists.
 - Includes design considerations in plans or units that touch UI, preferably by linking to `wiki/sources/design-brief.md` instead of duplicating it.
 - Updates the closest existing plan for corrective work or implementation discoveries instead of creating unrelated sidecar plans.
+- Moves fully complete plans into `wiki/plans/zzz_completed/` only after the top-level plan, all stages, all units, completion gates, and required verification records support completion.
+- Removes archived plans from active current-plan/current-unit slots while preserving compact completed-plan links from `wiki/plans/README.md`.
+- Preserves completed plan trees when archiving, such as moving `mvp/` as a whole instead of separating its stage and unit files.
 - Records completed validation or implementation findings in `wiki/log.md` only when they affect durable project context.
 
 ## Codebase Sync
